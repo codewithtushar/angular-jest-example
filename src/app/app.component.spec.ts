@@ -1,6 +1,10 @@
 import { createComponentFactory, Spectator } from '@ngneat/spectator/jest';
 import { AppComponent } from './app.component';
 
+const params = {
+  addFunctionParams : { param1: 1, param2: 2},
+  addFunctionResult : 3
+}
 describe('AppComponent', () => {
   const createComponent = createComponentFactory({
     component: AppComponent
@@ -15,12 +19,12 @@ describe('AppComponent', () => {
     expect(app).toBeTruthy();
   });
 
-  it(`should have as title 'angular-jest-spectator'`, () => {
+
+  it('should test add function', () => {
     const app = spectator.component;
-    expect(app.title).toEqual('angular-jest-spectator');
+    const results = app.add(params.addFunctionParams.param1, params.addFunctionParams.param2);
+    expect(results).toBe(params.addFunctionResult);
   });
 
-  it('should render title', () => {
-    expect(spectator.query('.content span').textContent).toContain('angular-jest-spectator app is running!');
-  });
+
 });
